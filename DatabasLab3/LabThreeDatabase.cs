@@ -96,10 +96,10 @@ namespace DatabasLab3
 
         public void XYZCoffeeBarStarIncrement()
         {
-            Console.WriteLine("\n=====Increment XYZ Coffee Bar Stars By One=====");
             var xyzCoffeeBarFilter = Builders<Restaurant>.Filter.Where(r => r.Name == "XYZ Coffee Bar");
             var incrementStarsUpdate = Builders<Restaurant>.Update.Inc((r => r.Stars), 1);
             collection.UpdateOne(xyzCoffeeBarFilter, incrementStarsUpdate);
+            Console.WriteLine("\nIncremented XYZ Coffee Bar stars by one");
 
             PrintAllDocuments();
         }
@@ -109,11 +109,13 @@ namespace DatabasLab3
             var cookieShopFilter = Builders<Restaurant>.Filter.Where(r => r.Name == "456 Cookies Shop");
             var cookieShopChangeNameUpdate = Builders<Restaurant>.Update.Set(r => r.Name, "123 Cookies Heaven");
             collection.UpdateOne(cookieShopFilter, cookieShopChangeNameUpdate);
+            Console.WriteLine("\nChanged name of 456 Cookies Shop to 123 Cookies Heaven");
             PrintAllDocuments();
         }
 
         public void PrintFourOrMoreStarRestaurants()
         {
+            Console.WriteLine("\n=====Restaurants of Four or More Stars=====");
             var fourStarsFilter = Builders<Restaurant>.Filter.Where(r => r.Stars >= 4);
             var nameStarProjection = Builders<Restaurant>.Projection.Include(r => r.Name).Include(r => r.Stars).Exclude(r => r._id);
             var fourStarRestaurants = collection.Aggregate().Match(fourStarsFilter).Project(nameStarProjection).ToList();
