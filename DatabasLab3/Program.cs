@@ -11,10 +11,12 @@ namespace DatabasLab3
         {
             string connectionString = "mongodb://localhost:27017";
             var client = new LabThreeDatabase(connectionString);
-            /*
             client.RestaurantCollectionExampleFill();
             client.PrintAllDocuments();
-            */
+            client.PrintCafes();
+            client.XYZCoffeeBarStarIncrement();
+            client.FourFiveSixCookiesShopNameChange();
+            client.PrintFourOrMoreStarRestaurants();
         }
     }
 }
